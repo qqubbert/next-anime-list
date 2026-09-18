@@ -7,6 +7,34 @@
     "anime": {
       "model": "Anime",
       "namespace": "public"
+    },
+    "animeCharacter": {
+      "model": "AnimeCharacter",
+      "namespace": "public"
+    },
+    "animeGenre": {
+      "model": "AnimeGenre",
+      "namespace": "public"
+    },
+    "animeStudio": {
+      "model": "AnimeStudio",
+      "namespace": "public"
+    },
+    "character": {
+      "model": "Character",
+      "namespace": "public"
+    },
+    "genre": {
+      "model": "Genre",
+      "namespace": "public"
+    },
+    "screenshot": {
+      "model": "Screenshot",
+      "namespace": "public"
+    },
+    "studio": {
+      "model": "Studio",
+      "namespace": "public"
     }
   },
   "domain": {
@@ -70,13 +98,6 @@
                 "nullable": true,
                 "type": {
                   "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-temporal@1",
                   "kind": "scalar"
                 }
               },
@@ -156,7 +177,68 @@
                 }
               }
             },
-            "relations": {},
+            "relations": {
+              "characters": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "animeId"
+                  ]
+                },
+                "to": {
+                  "model": "AnimeCharacter",
+                  "namespace": "public"
+                }
+              },
+              "genres": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "animeId"
+                  ]
+                },
+                "to": {
+                  "model": "AnimeGenre",
+                  "namespace": "public"
+                }
+              },
+              "screenshots": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "animeId"
+                  ]
+                },
+                "to": {
+                  "model": "Screenshot",
+                  "namespace": "public"
+                }
+              },
+              "studios": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "animeId"
+                  ]
+                },
+                "to": {
+                  "model": "AnimeStudio",
+                  "namespace": "public"
+                }
+              }
+            },
             "storage": {
               "fields": {
                 "bannerImage": {
@@ -164,9 +246,6 @@
                 },
                 "coverImage": {
                   "column": "coverImage"
-                },
-                "createdAt": {
-                  "column": "createdAt"
                 },
                 "description": {
                   "column": "description"
@@ -198,6 +277,417 @@
               },
               "namespaceId": "public",
               "table": "anime"
+            }
+          },
+          "AnimeCharacter": {
+            "fields": {
+              "animeId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "characterId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "anime": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "animeId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Anime",
+                  "namespace": "public"
+                }
+              },
+              "character": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "characterId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Character",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "animeId": {
+                  "column": "animeId"
+                },
+                "characterId": {
+                  "column": "characterId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "animeCharacter"
+            }
+          },
+          "AnimeGenre": {
+            "fields": {
+              "animeId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "genreId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "anime": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "animeId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Anime",
+                  "namespace": "public"
+                }
+              },
+              "genre": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "genreId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Genre",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "animeId": {
+                  "column": "animeId"
+                },
+                "genreId": {
+                  "column": "genreId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "animeGenre"
+            }
+          },
+          "AnimeStudio": {
+            "fields": {
+              "animeId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "studioId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "anime": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "animeId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Anime",
+                  "namespace": "public"
+                }
+              },
+              "studio": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "studioId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Studio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "animeId": {
+                  "column": "animeId"
+                },
+                "studioId": {
+                  "column": "studioId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "animeStudio"
+            }
+          },
+          "Character": {
+            "fields": {
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "imageUrl": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "role": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "animeCharacters": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "characterId"
+                  ]
+                },
+                "to": {
+                  "model": "AnimeCharacter",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "id": {
+                  "column": "id"
+                },
+                "imageUrl": {
+                  "column": "imageUrl"
+                },
+                "name": {
+                  "column": "name"
+                },
+                "role": {
+                  "column": "role"
+                }
+              },
+              "namespaceId": "public",
+              "table": "character"
+            }
+          },
+          "Genre": {
+            "fields": {
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "animeGenres": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "genreId"
+                  ]
+                },
+                "to": {
+                  "model": "AnimeGenre",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "genre"
+            }
+          },
+          "Screenshot": {
+            "fields": {
+              "animeId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "imageUrl": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "anime": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "animeId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Anime",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "animeId": {
+                  "column": "animeId"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "imageUrl": {
+                  "column": "imageUrl"
+                }
+              },
+              "namespaceId": "public",
+              "table": "screenshot"
+            }
+          },
+          "Studio": {
+            "fields": {
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "animeStudios": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "studioId"
+                  ]
+                },
+                "to": {
+                  "model": "AnimeStudio",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "studio"
             }
           }
         }
@@ -232,15 +722,6 @@
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": true
-                },
-                "createdAt": {
-                  "codecId": "pg/timestamptz-temporal@1",
-                  "default": {
-                    "expression": "now()",
-                    "kind": "function"
-                  },
-                  "nativeType": "timestamptz",
-                  "nullable": false
                 },
                 "description": {
                   "codecId": "pg/text@1",
@@ -318,6 +799,382 @@
                   ]
                 }
               ]
+            },
+            "animeCharacter": {
+              "columns": {
+                "animeId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "characterId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "source": {
+                    "columns": [
+                      "animeId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "animeCharacter"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "anime"
+                  }
+                },
+                {
+                  "source": {
+                    "columns": [
+                      "characterId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "animeCharacter"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "character"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "animeId"
+                  ],
+                  "name": "animeCharacter_animeId_idx_46bb9889",
+                  "prefix": "animeCharacter_animeId_idx",
+                  "unique": false
+                },
+                {
+                  "columns": [
+                    "characterId"
+                  ],
+                  "name": "animeCharacter_characterId_idx_2423fe9d",
+                  "prefix": "animeCharacter_characterId_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "animeId",
+                  "characterId"
+                ]
+              },
+              "uniques": []
+            },
+            "animeGenre": {
+              "columns": {
+                "animeId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "genreId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "source": {
+                    "columns": [
+                      "animeId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "animeGenre"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "anime"
+                  }
+                },
+                {
+                  "source": {
+                    "columns": [
+                      "genreId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "animeGenre"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "genre"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "animeId"
+                  ],
+                  "name": "animeGenre_animeId_idx_46bb9889",
+                  "prefix": "animeGenre_animeId_idx",
+                  "unique": false
+                },
+                {
+                  "columns": [
+                    "genreId"
+                  ],
+                  "name": "animeGenre_genreId_idx_8fce6a7b",
+                  "prefix": "animeGenre_genreId_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "animeId",
+                  "genreId"
+                ]
+              },
+              "uniques": []
+            },
+            "animeStudio": {
+              "columns": {
+                "animeId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "studioId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "source": {
+                    "columns": [
+                      "animeId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "animeStudio"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "anime"
+                  }
+                },
+                {
+                  "source": {
+                    "columns": [
+                      "studioId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "animeStudio"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "studio"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "animeId"
+                  ],
+                  "name": "animeStudio_animeId_idx_46bb9889",
+                  "prefix": "animeStudio_animeId_idx",
+                  "unique": false
+                },
+                {
+                  "columns": [
+                    "studioId"
+                  ],
+                  "name": "animeStudio_studioId_idx_efc35ac7",
+                  "prefix": "animeStudio_studioId_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "animeId",
+                  "studioId"
+                ]
+              },
+              "uniques": []
+            },
+            "character": {
+              "columns": {
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "imageUrl": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "role": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "genre": {
+              "columns": {
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "name"
+                  ]
+                }
+              ]
+            },
+            "screenshot": {
+              "columns": {
+                "animeId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "imageUrl": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "source": {
+                    "columns": [
+                      "animeId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "screenshot"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "anime"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "animeId"
+                  ],
+                  "name": "screenshot_animeId_idx_46bb9889",
+                  "prefix": "screenshot_animeId_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "studio": {
+              "columns": {
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": [
+                {
+                  "columns": [
+                    "name"
+                  ]
+                }
+              ]
             }
           },
           "valueSet": {
@@ -345,7 +1202,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "8b7df7804b58fa66649f8cc3211da666803aebfbcfe7e3685e55e23f6c6c902f"
+    "storageHash": "8b6804936a1e30c04db5c4b625cda89cb765461ce9472a17b53ab85579d7c3d0"
   },
   "capabilities": {
     "postgres": {

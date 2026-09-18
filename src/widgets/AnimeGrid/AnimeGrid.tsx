@@ -1,21 +1,19 @@
+import { Flex } from "antd";
+
 import type { Anime } from "@/shared/types";
 import { AnimeCard } from "@/entities/anime/ui/AnimeCard";
-
-import styles from "./AnimeGrid.module.css";
 
 type Props = {
   anime: Anime[];
 };
 
+
 export function AnimeGrid({ anime }: Props) {
   return (
-    <div className={styles.grid}>
+    <Flex wrap gap={20}>
       {anime.map((item) => (
-        <AnimeCard
-          key={item.id}
-          anime={item}
-        />
+        <AnimeCard key={item.id} anime={item} />
       ))}
-    </div>
+    </Flex>
   );
 }

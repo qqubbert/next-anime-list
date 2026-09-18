@@ -1,4 +1,4 @@
-export default function HomePage() {
+export const HomePage = () => {
   return (
     <main className={`page`}>
       <h1>Anime Aggregator</h1>

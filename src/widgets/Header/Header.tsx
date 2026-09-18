@@ -23,46 +23,53 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link href={homeLink} className={styles.logo}>
-        <Image src="/logo.png" alt="Next Anime List" width={50} height={50} priority/>
-        {/* <b>Next Anime List</b> */}
-      </Link>
-      <nav>
-        <ConfigProvider
-          theme={{
-            components: {
-              Tabs: {
-                itemColor: "#888",
-                itemSelectedColor: "#fff",
-                itemHoverColor: "#fff",
-                itemActiveColor: "#666",
-                // inkBarColor: "#fff",
+      <ConfigProvider
+        theme={{
+          components: {
+            Tabs: {
+              itemColor: "#888",
+              itemSelectedColor: "#fff",
+              itemHoverColor: "#fff",
+              itemActiveColor: "#666",
+              // inkBarColor: "#fff",
 
-                // horizontalItemGutter: 32,
-                // horizontalItemPadding: "12px 18px",
+              // horizontalItemGutter: 32,
+              // horizontalItemPadding: "12px 18px",
 
-                horizontalMargin: "0",
+              horizontalMargin: "0",
 
-                titleFontSize: 16,
-              },
+              titleFontSize: 16,
             },
-          }}
-        >
+            Avatar: {},
+          },
+        }}
+      >
+        <Link href={homeLink} className={styles.logo}>
+          <Image
+            src="/logo.png"
+            alt="Next Anime List"
+            width={50}
+            height={50}
+            priority
+          />
+          {/* <b>Next Anime List</b> */}
+        </Link>
+        <nav>
           <Tabs
             className={styles.tabs}
             activeKey={activeTab}
             items={headerTabs}
             onChange={(key) => router.push(key)}
           />
-        </ConfigProvider>
-      </nav>
-      <Link href={profileLink} className={styles.profile}>
-        <Avatar
-          className={styles.profileIcon}
-          shape="circle"
-          icon={<MehOutlined />}
-        />
-      </Link>
+        </nav>
+        <Link href={profileLink} className={styles.profile}>
+          <Avatar
+            className={styles.profileIcon}
+            shape="circle"
+            // icon={<MehOutlined />}
+          />
+        </Link>
+      </ConfigProvider>
     </header>
   );
 };

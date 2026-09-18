@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'8b6804936a1e30c04db5c4b625cda89cb765461ce9472a17b53ab85579d7c3d0'>;
+  StorageHashBase<'798ca3db8597165f699d01881c2cf097cf4fb34a1c57713da494cbfa6f796af1'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -253,6 +253,7 @@ export type FieldOutputTypes = {
       readonly status: 'ONGOING' | 'FINISHED' | 'ANNOUNCED';
       readonly type: 'TV' | 'MOVIE' | 'OVA' | 'ONA' | 'SPECIAL';
       readonly rating: CodecTypes['pg/float8@1']['output'] | null;
+      readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     };
     readonly AnimeCharacter: {
       readonly animeId: CodecTypes['pg/int4@1']['output'];
@@ -301,6 +302,7 @@ export type FieldInputTypes = {
       readonly status: 'ONGOING' | 'FINISHED' | 'ANNOUNCED';
       readonly type: 'TV' | 'MOVIE' | 'OVA' | 'ONA' | 'SPECIAL';
       readonly rating: CodecTypes['pg/float8@1']['input'] | null;
+      readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
     };
     readonly AnimeCharacter: {
       readonly animeId: CodecTypes['pg/int4@1']['input'];
@@ -340,6 +342,7 @@ export type StorageColumnTypes = {
     readonly anime: {
       readonly bannerImage: CodecTypes['pg/text@1']['output'] | null;
       readonly coverImage: CodecTypes['pg/text@1']['output'] | null;
+      readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
       readonly description: CodecTypes['pg/text@1']['output'] | null;
       readonly episodes: CodecTypes['pg/int4@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
@@ -388,6 +391,7 @@ export type StorageColumnInputTypes = {
     readonly anime: {
       readonly bannerImage: CodecTypes['pg/text@1']['input'] | null;
       readonly coverImage: CodecTypes['pg/text@1']['input'] | null;
+      readonly createdAt: CodecTypes['pg/timestamptz-temporal@1']['input'];
       readonly description: CodecTypes['pg/text@1']['input'] | null;
       readonly episodes: CodecTypes['pg/int4@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
@@ -445,6 +449,7 @@ export namespace Models {
     status: 'ONGOING' | 'FINISHED' | 'ANNOUNCED';
     type: 'TV' | 'MOVIE' | 'OVA' | 'ONA' | 'SPECIAL';
     rating: CodecTypes['pg/float8@1']['output'] | null;
+    createdAt: CodecTypes['pg/timestamptz-temporal@1']['output'];
     characters: public_AnimeCharacter[];
     genres: public_AnimeGenre[];
     screenshots: public_Screenshot[];
@@ -592,6 +597,12 @@ type ContractBase = Omit<
                   readonly nativeType: 'float8';
                   readonly codecId: 'pg/float8@1';
                   readonly nullable: true;
+                };
+                readonly createdAt: {
+                  readonly nativeType: 'timestamptz';
+                  readonly codecId: 'pg/timestamptz-temporal@1';
+                  readonly nullable: false;
+                  readonly default: { readonly kind: 'function'; readonly expression: 'now()' };
                 };
               };
               primaryKey: { readonly columns: readonly ['id'] };
@@ -982,6 +993,13 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/float8@1' };
               };
+              readonly createdAt: {
+                readonly nullable: false;
+                readonly type: {
+                  readonly kind: 'scalar';
+                  readonly codecId: 'pg/timestamptz-temporal@1';
+                };
+              };
             };
             readonly relations: {
               readonly characters: {
@@ -1044,6 +1062,7 @@ type ContractBase = Omit<
                 readonly status: { readonly column: 'status' };
                 readonly type: { readonly column: 'type' };
                 readonly rating: { readonly column: 'rating' };
+                readonly createdAt: { readonly column: 'createdAt' };
               };
             };
           };

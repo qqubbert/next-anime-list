@@ -27,6 +27,69 @@ model Anime {
   type        AnimeType
   rating      Float?
 
-  createdAt   DateTime    @default(now())
-  // updatedAt   DateTime    @default(temporal.updatedAt())
+  genres      AnimeGenre[]
+  screenshots Screenshot[]
+  characters  AnimeCharacter[]
+  studios     AnimeStudio[]
+}
+
+model Genre {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+
+  animeGenres AnimeGenre[]
+}
+
+model AnimeGenre {
+  animeId Int
+  genreId Int
+
+  anime Anime @relation(fields: [animeId], references: [id])
+  genre Genre @relation(fields: [genreId], references: [id])
+
+  @@id([animeId, genreId])
+}
+
+model Screenshot {
+  id       Int    @id @default(autoincrement())
+  imageUrl String
+
+  animeId Int
+  anime   Anime @relation(fields: [animeId], references: [id])
+}
+
+model Character {
+  id        Int    @id @default(autoincrement())
+  name      String
+  imageUrl  String?
+  role      String?
+
+  animeCharacters AnimeCharacter[]
+}
+
+model AnimeCharacter {
+  animeId      Int
+  characterId  Int
+
+  anime      Anime      @relation(fields: [animeId], references: [id])
+  character  Character  @relation(fields: [characterId], references: [id])
+
+  @@id([animeId, characterId])
+}
+
+model Studio {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  animeStudios AnimeStudio[]
+}
+
+model AnimeStudio {
+  animeId   Int
+  studioId  Int
+
+  anime   Anime  @relation(fields: [animeId], references: [id])
+  studio  Studio @relation(fields: [studioId], references: [id])
+
+  @@id([animeId, studioId])
 }
