@@ -1,9 +1,6 @@
-import { Button } from "antd";
-
-
 export default function HomePage() {
   return (
-    <main>
+    <main className={`page`}>
       <h1>Anime Aggregator</h1>
     </main>
   );

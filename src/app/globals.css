@@ -47,3 +47,8 @@ a {
     color-scheme: dark;
   }
 }
+
+.page {
+  padding: 20px;
+  flex: 1;
+}

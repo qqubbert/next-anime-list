@@ -25,6 +25,7 @@ export const Header = () => {
     <header className={styles.header}>
       <Link href={homeLink} className={styles.logo}>
         <Image src="/logo.png" alt="Next Anime List" width={50} height={50} priority/>
+        {/* <b>Next Anime List</b> */}
       </Link>
       <nav>
         <ConfigProvider

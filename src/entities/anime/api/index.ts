@@ -1,0 +1,1 @@
+export { getAnime } from "./getAnime";
