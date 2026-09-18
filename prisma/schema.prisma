@@ -1,0 +1,30 @@
+enum AnimeStatus {
+  ONGOING
+  FINISHED
+  ANNOUNCED
+}
+
+enum AnimeType {
+  TV
+  MOVIE
+  OVA
+  ONA
+  SPECIAL
+}
+
+model Anime {
+  id          Int         @id @default(autoincrement())
+  title       String
+  slug        String      @unique
+  description String?
+  coverImage  String?
+  bannerImage String?
+  year        Int?
+  episodes    Int?
+  status      AnimeStatus
+  type        AnimeType
+  rating      Float?
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}

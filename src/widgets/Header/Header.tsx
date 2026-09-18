@@ -1,22 +1,31 @@
 "use client";
 
-import { Tabs, ConfigProvider } from "antd";
+import { Tabs, ConfigProvider, Avatar } from "antd";
+import { MehOutlined } from "@ant-design/icons";
 import { useRouter, usePathname } from "next/navigation";
-import { tabs } from "@/shared/config";
+import { headerTabs, allTabs } from "@/shared/config";
+import Image from "next/image";
 
 import styles from "./Header.module.css";
+import Link from "next/link";
 
 export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const activeTab =
-    tabs.find((tab) => pathname.startsWith(tab.key) && tab.key !== "/")?.key ??
-    "/";
+  const activeTab = headerTabs.find(
+    (tab) => tab.key !== "/" && pathname?.startsWith(tab.key),
+  )?.key;
+
+  const homeLink = allTabs.find((tab) => tab.id === "home")?.key || "/";
+  const profileLink =
+    allTabs.find((tab) => tab.id === "profile")?.key || "/profile";
 
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Anime</div>
+      <Link href={homeLink} className={styles.logo}>
+        <Image src="/logo.png" alt="Next Anime List" width={50} height={50} priority/>
+      </Link>
       <nav>
         <ConfigProvider
           theme={{
@@ -41,13 +50,18 @@ export const Header = () => {
           <Tabs
             className={styles.tabs}
             activeKey={activeTab}
-            items={tabs}
+            items={headerTabs}
             onChange={(key) => router.push(key)}
           />
         </ConfigProvider>
       </nav>
-      <YoutubeFilled />
-      <div className={styles.profile}>Profile</div>
+      <Link href={profileLink} className={styles.profile}>
+        <Avatar
+          className={styles.profileIcon}
+          shape="circle"
+          icon={<MehOutlined />}
+        />
+      </Link>
     </header>
   );
 };

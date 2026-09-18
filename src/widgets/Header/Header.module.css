@@ -18,3 +18,11 @@
 .tabs :global(.ant-tabs-ink-bar) {
   display: none;
 }
+
+.profile {
+  
+}
+
+:global(.ant-avatar) {
+  background-color: gray;
+}

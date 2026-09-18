@@ -1,1 +1,1 @@
-export { tabs } from "./content";
+export { headerTabs, allTabs } from "./content";
