@@ -9,7 +9,7 @@ type Props = {
   anime: Anime;
 };
 
-export function AnimeCard({ anime }: Props) {
+export const AnimeCard = ({ anime }: Props) => {
   return (
     <ConfigProvider
       theme={{

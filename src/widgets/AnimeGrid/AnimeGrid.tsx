@@ -1,7 +1,7 @@
 import { Flex } from "antd";
 
 import type { Anime } from "@/shared/types";
-import { AnimeCard } from "@/entities/anime/ui/AnimeCard";
+import { AnimeCard } from "@/entities/anime/ui/Card/AnimeCard";
 
 type Props = {
   anime: Anime[];

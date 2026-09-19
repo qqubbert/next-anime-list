@@ -1,0 +1,1 @@
+export { AnimeGenres } from "./AnimeGenres";

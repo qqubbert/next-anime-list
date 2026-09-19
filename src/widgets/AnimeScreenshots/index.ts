@@ -1,0 +1,1 @@
+export { AnimeScreenshots } from "./AnimeScreenshots";

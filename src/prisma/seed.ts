@@ -299,6 +299,22 @@ async function main() {
       animeId: onePiece.id,
       imageUrl: "/anime/one-piece/screenshots/03.jpg",
     },
+    {
+      animeId: onePiece.id,
+      imageUrl: "/anime/one-piece/screenshots/04.jpg",
+    },
+    {
+      animeId: onePiece.id,
+      imageUrl: "/anime/one-piece/screenshots/05.jpg",
+    },
+    {
+      animeId: onePiece.id,
+      imageUrl: "/anime/one-piece/screenshots/06.jpg",
+    },
+    {
+      animeId: onePiece.id,
+      imageUrl: "/anime/one-piece/screenshots/07.jpg",
+    },
 
     {
       animeId: attackOnTitan.id,
@@ -312,6 +328,26 @@ async function main() {
       animeId: attackOnTitan.id,
       imageUrl: "/anime/attack-on-titan/screenshots/03.jpg",
     },
+    {
+      animeId: attackOnTitan.id,
+      imageUrl: "/anime/attack-on-titan/screenshots/04.jpg",
+    },
+    {
+      animeId: attackOnTitan.id,
+      imageUrl: "/anime/attack-on-titan/screenshots/05.jpg",
+    },
+    {
+      animeId: attackOnTitan.id,
+      imageUrl: "/anime/attack-on-titan/screenshots/06.jpg",
+    },
+    {
+      animeId: attackOnTitan.id,
+      imageUrl: "/anime/attack-on-titan/screenshots/07.jpg",
+    },
+    {
+      animeId: attackOnTitan.id,
+      imageUrl: "/anime/attack-on-titan/screenshots/08.jpg",
+    },
 
     {
       animeId: chainsawMan.id,
@@ -324,6 +360,26 @@ async function main() {
     {
       animeId: chainsawMan.id,
       imageUrl: "/anime/chainsaw-man/screenshots/03.jpg",
+    },
+    {
+      animeId: chainsawMan.id,
+      imageUrl: "/anime/chainsaw-man/screenshots/04.jpg",
+    },
+    {
+      animeId: chainsawMan.id,
+      imageUrl: "/anime/chainsaw-man/screenshots/05.jpg",
+    },
+    {
+      animeId: chainsawMan.id,
+      imageUrl: "/anime/chainsaw-man/screenshots/06.jpg",
+    },
+    {
+      animeId: chainsawMan.id,
+      imageUrl: "/anime/chainsaw-man/screenshots/07.jpg",
+    },
+    {
+      animeId: chainsawMan.id,
+      imageUrl: "/anime/chainsaw-man/screenshots/08.jpg",
     },
   ]);
 

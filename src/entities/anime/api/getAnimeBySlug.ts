@@ -16,5 +16,6 @@ export const getAnimeBySlug = async (slug: string) => {
       "rating",
     )
     .where((anime) => anime.slug.eq(slug))
+    .include("screenshots")
     .first();
 };
